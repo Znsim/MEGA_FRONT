@@ -1,40 +1,42 @@
-import { Button, Modal, Box, Typography } from "@mui/material";
-import { useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { routes } from "./routes";
+import { Home } from "./views/home/Home";
+import { Map } from "./views/map/Map";
+import { BlogMain } from "./views/blog/BlogMain";
+import { MyPage } from "./views/mypage/Mypage";
+import { Login } from "./views/login/Login";
+import { Sign } from "./views/login/Sign";
+import { Container } from "@mui/material";
+import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
+import { PageNotFound } from "./views/PageNotFound";
 
 function App() {
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
-  };
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
   return (
     <>
-      <Button onClick={handleOpen}>Open modal</Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+      <Container
+        sx={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+        }}
+        maxWidth="lg"
       >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
-        </Box>
-      </Modal>
+        <BrowserRouter basename="/24_04_03_vite_project_practice">
+          <Header />
+          <Routes>
+            <Route path={routes.home} element={<Home />} />
+            <Route path={routes.map} element={<Map />} />
+            <Route path={routes.blog} element={<BlogMain />} />
+            <Route path={routes.mypage} element={<MyPage />} />
+            <Route path={routes.login} element={<Login />} />
+            <Route path={routes.sign} element={<Sign />} />
+            <Route path="/*" element={<PageNotFound />} />
+          </Routes>
+        </BrowserRouter>
+        <Footer />
+      </Container>
     </>
   );
 }
