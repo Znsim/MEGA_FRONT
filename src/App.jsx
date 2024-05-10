@@ -23,7 +23,7 @@ function App() {
         }}
         maxWidth="lg"
       >
-        <BrowserRouter basename="/24_04_03_vite_project_practice">
+        <BrowserRouter>
           <Header />
           <Routes>
             <Route path={routes.home} element={<Home />} />
