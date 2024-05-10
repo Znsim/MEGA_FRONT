@@ -25,7 +25,7 @@ function App() {
         }}
         maxWidth="lg"
       >
-        <BrowserRouter>
+        <BrowserRouter basename="/MEGA_FRONT">
           <Header />
           <Routes>
             <Route path={routes.home} element={<Home />} />

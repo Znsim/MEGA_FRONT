@@ -38,7 +38,12 @@ export const Header = () => {
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
-            <Button sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}>
+            <Button
+              sx={{
+                display: { xs: "flex", md: "none" },
+                mr: 1,
+              }}
+            >
               앱아이콘1
             </Button>
             <Typography
@@ -58,7 +63,13 @@ export const Header = () => {
             >
               LOGO
             </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <Box
+              sx={{
+                flexGrow: 1,
+                display: { xs: "flex", md: "none" },
+                color: "inherit",
+              }}
+            >
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -131,7 +142,7 @@ export const Header = () => {
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" /> */}
-                  <Box>앱아이콘3 아바타</Box>
+                  <Box>아바타</Box>
                 </IconButton>
               </Tooltip>
               <Menu
