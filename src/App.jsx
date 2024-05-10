@@ -6,14 +6,16 @@ import { BlogMain } from "./views/blog/BlogMain";
 import { MyPage } from "./views/mypage/Mypage";
 import { Login } from "./views/login/Login";
 import { Sign } from "./views/login/Sign";
-import { Container } from "@mui/material";
+import { Container, CssBaseline } from "@mui/material";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { PageNotFound } from "./views/PageNotFound";
+import theme from "./Muistyle";
 
 function App() {
   return (
     <>
+      <CssBaseline theme={theme} />
       <Container
         sx={{
           width: "100%",
@@ -34,8 +36,8 @@ function App() {
             <Route path={routes.sign} element={<Sign />} />
             <Route path="/*" element={<PageNotFound />} />
           </Routes>
+          <Footer />
         </BrowserRouter>
-        <Footer />
       </Container>
     </>
   );
