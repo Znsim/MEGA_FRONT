@@ -1,16 +1,16 @@
-import {
-  AppBar,
-  Box,
-  Button,
-  IconButton,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+// import {
+//   AppBar,
+//   Box,
+//   Button,
+//   IconButton,
+//   Toolbar,
+//   Typography,
+// } from "@mui/material";
 
 export const Header = () => {
   return (
     <>
-      <Box sx={{ flexGrow: 1 }}>
+      {/* <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
             <IconButton
@@ -19,16 +19,15 @@ export const Header = () => {
               color="inherit"
               aria-label="menu"
               sx={{ mr: 2 }}
-            >
-              {/* <MenuIcon /> */}
-            </IconButton>
+            ></IconButton>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               우리집 개냥이
             </Typography>
             <Button color="inherit">Login</Button>
           </Toolbar>
         </AppBar>
-      </Box>
+      </Box> */}
+      <>Header</>
     </>
   );
 };
