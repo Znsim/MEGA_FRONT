@@ -1,3 +1,0 @@
-export const BlogDetail = () => {
-  return <></>;
-};

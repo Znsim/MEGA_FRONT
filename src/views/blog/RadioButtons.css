@@ -1,0 +1,14 @@
+/* RadioButtons.css */
+
+.radio-buttons {
+    position: absolute;
+    top: 100px; /* 하단 여백 조절 */
+    right: 20px; /* 우측 여백 조절 */
+    display: flex;
+    align-items: center;
+  }
+  
+  .radio-label {
+    margin-right: 8px; /* 라벨 간격 조절 */
+  }
+  
