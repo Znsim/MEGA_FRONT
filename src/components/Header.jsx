@@ -11,46 +11,52 @@ import {
   Button,
 } from "@mui/material";
 import { useState } from "react";
+import { LOGO } from "./LOGO";
+import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "../store/useAuthStore";
+import { DragHandle } from "@mui/icons-material";
+import { routes } from "../routes";
 
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const views = [
+  { korean: "개냥이 지도", english: "map" },
+  { korean: "블로그", english: "blog" },
+];
+const settings = ["마이페이지", "로그아웃"];
 
 export const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const { isAuthenticated } = useAuthStore();
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
+  const navigate = useNavigate();
+  const handleOpenUserMenu = () => {
+    if (isAuthenticated) {
+      navigate(routes.mypage); // 마이페이지로 이동
+    } else {
+      navigate(routes.login); // 로그인 페이지로 이동
+    }
   };
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = (slug) => {
+    navigate(slug);
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+  // const handleCloseUserMenu = () => {
+  //   setAnchorElUser(null);
+  // };
   return (
     <>
       <AppBar position="static">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
-            <Button
-              sx={{
-                display: { xs: "flex", md: "none" },
-                mr: 1,
-              }}
-            >
-              앱아이콘1
-            </Button>
             <Typography
               variant="h6"
               noWrap
               component="a"
-              href="#app-bar-with-responsive-menu"
+              href={routes.home}
               sx={{
                 mr: 2,
                 display: { xs: "none", md: "flex" },
@@ -61,13 +67,13 @@ export const Header = () => {
                 textDecoration: "none",
               }}
             >
-              LOGO
+              <LOGO sx={{ maxWidth: 200 }} />
             </Typography>
             <Box
               sx={{
                 flexGrow: 1,
                 display: { xs: "flex", md: "none" },
-                color: "inherit",
+                color: "#000",
               }}
             >
               <IconButton
@@ -76,9 +82,8 @@ export const Header = () => {
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={handleOpenNavMenu}
-                color="inherit"
               >
-                {/* <MenuIcon /> */}
+                <DragHandle style={{ color: "#000" }} />
               </IconButton>
               <Menu
                 id="menu-appbar"
@@ -93,29 +98,49 @@ export const Header = () => {
                   horizontal: "left",
                 }}
                 open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
+                // onClose={handleCloseNavMenu}
                 sx={{
                   display: { xs: "block", md: "none" },
                 }}
               >
-                {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
-                  </MenuItem>
+                {views.map((views) => (
+                  <Button
+                    key={views.english}
+                    onClick={() => handleCloseNavMenu(views.english)}
+                    style={{ color: "#000" }}
+                  >
+                    {views.korean}
+                  </Button>
                 ))}
               </Menu>
             </Box>
-            {/* <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} /> */}
-            <Button sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}>
-              앱아이콘2
+            {/* <Button
+              sx={{
+                display: { xs: "none", md: "block" },
+                mr: 1,
+                color: "#000",
+              }}
+              component="a"
+              href={routes.map}
+            >
+              개냥이 지도
             </Button>
+            <Button
+              sx={{
+                display: { xs: "none", md: "block", color: "#000" },
+                mr: 1,
+              }}
+              component="a"
+              href={routes.blog}
+            >
+              블로그
+            </Button> */}
             <Typography
               variant="h5"
               noWrap
               component="a"
-              href="#app-bar-with-responsive-menu"
+              href={routes.home}
               sx={{
-                mr: 2,
                 display: { xs: "flex", md: "none" },
                 flexGrow: 1,
                 fontFamily: "monospace",
@@ -125,24 +150,22 @@ export const Header = () => {
                 textDecoration: "none",
               }}
             >
-              LOGO
+              <LOGO sx={{ maxWidth: 200 }} />
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {pages.map((page) => (
+              {views.map((views) => (
                 <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
+                  key={views.english}
+                  onClick={() => handleCloseNavMenu(views.english)}
                 >
-                  {page}
+                  {views.korean}
                 </Button>
               ))}
             </Box>
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" /> */}
-                  <Box>아바타</Box>
+                  <Box>LOGIN</Box>
                 </IconButton>
               </Tooltip>
               <Menu
@@ -159,11 +182,13 @@ export const Header = () => {
                   horizontal: "right",
                 }}
                 open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
+                // onClose={handleCloseUserMenu}
               >
                 {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                  <MenuItem key={setting} /* onClick={handleCloseUserMenu} */>
+                    <Typography variant="h1" textAlign="center">
+                      {setting}
+                    </Typography>
                   </MenuItem>
                 ))}
               </Menu>
@@ -171,7 +196,6 @@ export const Header = () => {
           </Toolbar>
         </Container>
       </AppBar>
-      {/* <>Header</> */}
     </>
   );
 };

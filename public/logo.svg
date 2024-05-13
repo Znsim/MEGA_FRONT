@@ -1,0 +1,21 @@
+<svg width="40" viewBox="0 0 860 947" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M844.5 932C792.285 883.5 659.37 799 431 799C202.63 799 53.0097 897 15 932" stroke="black" stroke-width="30" stroke-linecap="round"/>
+<path d="M446 148.19C312 152.19 178.5 210.19 149 498.69C137.5 695.69 211.5 799.69 217.5 810.69" stroke="black" stroke-width="30" stroke-linecap="round"/>
+<path d="M642.5 810.69C664.5 758.69 696 680.773 696 497.69C688 409.19 685 391.69 652 294.19" stroke="black" stroke-width="30" stroke-linecap="round"/>
+<path d="M484.5 301.19C523.5 311.69 678.5 334.19 684 200.69C684.512 188.263 670.983 76.1044 588.483 80.1044C510.983 141.104 501 143.19 450 148.19" stroke="black" stroke-width="30" stroke-linecap="round"/>
+<path d="M155.5 616.691C155.5 622.691 258.18 588.433 309 484.19C359.821 379.948 348 345.69 337.5 288.19" stroke="black" stroke-width="30" stroke-linecap="round"/>
+<path d="M305 493.691C346 421.691 395.879 438.865 508.5 411.191C608 394.691 629.5 358.691 642 311.691" stroke="black" stroke-width="30" stroke-linecap="round"/>
+<path d="M438 638C438 667.437 455.06 681 475.771 681C496.482 681 513 667.437 513 638" stroke="black" stroke-width="25" stroke-linecap="round"/>
+<path d="M347 638C347 667.437 364.06 681 384.771 681C405.482 681 422 667.437 422 638" stroke="black" stroke-width="25" stroke-linecap="round"/>
+<path d="M461 622.19C461 633.512 447.121 642.69 430 642.69C412.879 642.69 399 633.512 399 622.19C399 610.869 412.879 601.69 430 601.69C447.121 601.69 461 610.869 461 622.19Z" fill="black"/>
+<circle cx="426.5" cy="223.19" r="17.5" fill="black"/>
+<circle cx="490.5" cy="566.5" r="17.5" fill="black"/>
+<circle cx="369.5" cy="566.5" r="17.5" fill="black"/>
+<ellipse cx="596.5" cy="125.5" rx="58.5" ry="45.5" fill="black"/>
+<line x1="605.419" y1="657.505" x2="748.505" y2="645.581" stroke="black" stroke-width="25" stroke-linecap="round"/>
+<line x1="12.5" y1="-12.5" x2="156.082" y2="-12.5" transform="matrix(-0.996546 -0.0830455 -0.0830455 0.996546 262 671)" stroke="black" stroke-width="25" stroke-linecap="round"/>
+<line x1="603.335" y1="691.655" x2="745.077" y2="714.571" stroke="black" stroke-width="25" stroke-linecap="round"/>
+<line x1="12.5" y1="-12.5" x2="156.082" y2="-12.5" transform="matrix(-0.987182 0.159598 0.159598 0.987182 267 702)" stroke="black" stroke-width="25" stroke-linecap="round"/>
+<path d="M138 90H266" stroke="#FFE921" stroke-width="50" stroke-linecap="round"/>
+<path d="M203 25L203 157" stroke="#FFE603" stroke-width="50" stroke-linecap="round"/>
+</svg>
