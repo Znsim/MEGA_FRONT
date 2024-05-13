@@ -2,17 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { NavermapsProvider } from "react-naver-maps";
 import App from "./App.jsx";
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import { CssBaseline } from "@mui/material";
 import { NAVER_CLIENT_ID } from "./constants.jsx";
-import theme from "./Muistyle";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <CssBaseline />
-    <ThemeProvider theme={theme}>
-      <NavermapsProvider ncpClientId={`${NAVER_CLIENT_ID}`}>
-        <App />
-      </NavermapsProvider>
-    </ThemeProvider>
+    <NavermapsProvider ncpClientId={`${NAVER_CLIENT_ID}`}>
+      <App />
+    </NavermapsProvider>
   </React.StrictMode>
 );
