@@ -21,7 +21,6 @@ const views = [
   { korean: "개냥이 지도", english: "map" },
   { korean: "블로그", english: "blog" },
 ];
-const settings = ["마이페이지", "로그아웃"];
 
 export const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -44,12 +43,15 @@ export const Header = () => {
     setAnchorElNav(null);
   };
 
-  // const handleCloseUserMenu = () => {
-  //   setAnchorElUser(null);
-  // };
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
   return (
     <>
-      <AppBar position="static">
+      <AppBar
+        position="static"
+        sx={{ background: "#fff", boxShadow: 0, mb: 3 }}
+      >
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Typography
@@ -98,7 +100,7 @@ export const Header = () => {
                   horizontal: "left",
                 }}
                 open={Boolean(anchorElNav)}
-                // onClose={handleCloseNavMenu}
+                onClose={handleCloseNavMenu}
                 sx={{
                   display: { xs: "block", md: "none" },
                 }}
@@ -114,27 +116,6 @@ export const Header = () => {
                 ))}
               </Menu>
             </Box>
-            {/* <Button
-              sx={{
-                display: { xs: "none", md: "block" },
-                mr: 1,
-                color: "#000",
-              }}
-              component="a"
-              href={routes.map}
-            >
-              개냥이 지도
-            </Button>
-            <Button
-              sx={{
-                display: { xs: "none", md: "block", color: "#000" },
-                mr: 1,
-              }}
-              component="a"
-              href={routes.blog}
-            >
-              블로그
-            </Button> */}
             <Typography
               variant="h5"
               noWrap
@@ -165,33 +146,9 @@ export const Header = () => {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Box>LOGIN</Box>
+                  <Box>{isAuthenticated ? "Login" : "내일르"}</Box>
                 </IconButton>
               </Tooltip>
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                // onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} /* onClick={handleCloseUserMenu} */>
-                    <Typography variant="h1" textAlign="center">
-                      {setting}
-                    </Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
             </Box>
           </Toolbar>
         </Container>

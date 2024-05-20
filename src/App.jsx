@@ -2,7 +2,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { routes } from "./routes";
 import { Home } from "./views/home/Home";
 import { Map } from "./views/map/Map";
-import { MyPage } from "./views/mypage/Mypage";
 import { Login } from "./views/login/Login";
 import { Sign } from "./views/login/Sign";
 import { Container, CssBaseline } from "@mui/material";
@@ -12,6 +11,7 @@ import { PageNotFound } from "./views/PageNotFound";
 import { Logout } from "./views/login/Logout";
 import { useAuthStore } from "./store/useAuthStore";
 import { BlogMain } from "./views/blog/BlogMain";
+import { MyPage } from "./views/mypage/MyPage";
 
 function App() {
   const { isAuthenticated } = useAuthStore();

@@ -18,7 +18,19 @@ export const BlogMain = () => {
   };
   return (
     <>
-      <div>
+      <Box
+        sx={{
+          position: "fixed",
+          bottom: "20px",
+          right: "20px",
+          "& > :not(style)": { m: 1 },
+        }}
+      >
+        <Fab color="primary" aria-label="add">
+          {/* <AddIcon /> */}
+        </Fab>
+      </Box>
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
         <div>
           <RadioButtons />
         </div>
@@ -30,20 +42,7 @@ export const BlogMain = () => {
           {/* RecipeReviewCard 컴포넌트를 사용 */}
           <RecipeReviewCard />
         </div>
-
-        <Box
-          sx={{
-            position: "fixed",
-            bottom: "20px",
-            right: "20px",
-            "& > :not(style)": { m: 1 },
-          }}
-        >
-          <Fab color="primary" aria-label="add">
-            {/* <AddIcon /> */}
-          </Fab>
-        </Box>
-      </div>
+      </Box>
     </>
   );
 };

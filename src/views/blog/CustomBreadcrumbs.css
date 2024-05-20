@@ -1,20 +1,25 @@
 /* CustomBreadcrumbs.css */
 
 .breadcrumbs-container {
-    position: absolute;
-    top: 150px; /* 하단 여백 조절 */
-    right: 20px; /* 우측 여백 조절 */
-    transform: translateX(5%);
-    z-index: 1000; /* 다른 요소 위에 표시되도록 설정 */
-  }
-  
-  /* Breadcrumbs 컴포넌트의 스타일 수정 */
-  .breadcrumbs-container .MuiBreadcrumbs-root {
-    color: black; /* 흰색으로 글씨 색상 변경 */
-  }
-  
-  /* Link 컴포넌트의 스타일 수정 */
-  .breadcrumbs-container .MuiBreadcrumbs-root .MuiBreadcrumbs-li .MuiTypography-root {
-    margin-right: 10px; /* 글씨 간격 조절 */
-  }
-  
+  /* position: absolute; */
+  /* top: 150px; */ /* 하단 여백 조절 */
+  /* right: 20px;  */ /* 우측 여백 조절 */
+  /* transform: translateX(5%); */
+  z-index: 1000; /* 다른 요소 위에 표시되도록 설정 */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* Breadcrumbs 컴포넌트의 스타일 수정 */
+.breadcrumbs-container .MuiBreadcrumbs-root {
+  color: black; /* 흰색으로 글씨 색상 변경 */
+}
+
+/* Link 컴포넌트의 스타일 수정 */
+.breadcrumbs-container
+  .MuiBreadcrumbs-root
+  .MuiBreadcrumbs-li
+  .MuiTypography-root {
+  margin-right: 10px; /* 글씨 간격 조절 */
+}
