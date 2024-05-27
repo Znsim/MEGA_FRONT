@@ -7,6 +7,7 @@ import {
   CardActions,
   IconButton,
   Typography,
+  CardActionArea,
 } from "@mui/material";
 // import { FavoriteIcon } from "@mui/icons-material";
 // import { ShareIcon } from "@mui/icons-material";
@@ -62,32 +63,34 @@ export const RecipeReviewCard = () => {
     >
       {blogData.map((blog, index) => (
         <Card key={index} sx={{ maxWidth: 345, width: "100%" }}>
-          <CardHeader title={blog.title} subheader={blog.date} />
-          <CardMedia
-            component="img"
-            height="350"
-            width="1000"
-            image={blog.imageUrl}
-          />
-          <CardContent>
-            <Typography variant="body2" color="text.secondary">
-              {blog.content}
-            </Typography>
-          </CardContent>
-          <CardActions disableSpacing>
-            <IconButton aria-label="add to favorites">
-              {/* <FavoriteIcon /> */}
-            </IconButton>
-            <IconButton aria-label="share">{/* <ShareIcon /> */}</IconButton>
-            <Typography
-              variant="body2"
-              color="text.secondary"
-              style={{ marginLeft: "auto" }}
-            >
-              {/* animal 값에 따라 Cat 또는 Dog 컴포넌트를 조건부로 렌더링 */}
-              {blog.animal}
-            </Typography>
-          </CardActions>
+          <CardActionArea href={`/blog/${blog.id}`}>
+            <CardHeader title={blog.title} subheader={blog.date} />
+            <CardMedia
+              component="img"
+              height="350"
+              width="1000"
+              image={blog.imageUrl}
+            />
+            <CardContent>
+              <Typography variant="body2" color="text.secondary">
+                {blog.content}
+              </Typography>
+            </CardContent>
+            <CardActions disableSpacing>
+              <IconButton aria-label="add to favorites">
+                {/* <FavoriteIcon /> */}
+              </IconButton>
+              <IconButton aria-label="share">{/* <ShareIcon /> */}</IconButton>
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                style={{ marginLeft: "auto" }}
+              >
+                {/* animal 값에 따라 Cat 또는 Dog 컴포넌트를 조건부로 렌더링 */}
+                {blog.animal}
+              </Typography>
+            </CardActions>
+          </CardActionArea>
         </Card>
       ))}
     </div>
