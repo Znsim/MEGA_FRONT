@@ -37,7 +37,7 @@ function App() {
             <Route path={routes.mypage} element={<MyPage />} />
             <Route
               path={routes.login}
-              element={isAuthenticated ? <Logout /> : <Login />}
+              element={isAuthenticated ? <MyPage /> : <Login />}
             />
             <Route path={routes.sign} element={<Sign />} />
             <Route path="/*" element={<PageNotFound />} />

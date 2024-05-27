@@ -10,44 +10,25 @@ import {
   unSelectedMarkerIcon,
 } from "../../util/markerIcon";
 
-const dummyMarkers = [
-  {
-    id: 1,
-    lat: 35.244111236,
-    lon: 128.902998,
-    name: "인제병원",
-    category: "100",
-    address: "경남 김해시 어쩌고",
-  },
-  {
-    id: 2,
-    lat: 35.24212364,
-    lon: 128.902773,
-    name: "인제병원2",
-    category: "100",
-    address: "경남 김해시 어쩌고2",
-  },
-  {
-    id: 3,
-    lat: 35.248112364,
-    lon: 128.90808,
-    name: "인제동물1",
-    category: "200",
-    address: "경남 김해시 어쩌고3",
-  },
-  {
-    id: 4,
-    lat: 35.2468944,
-    lon: 128.9045292,
-    name: "인제동물2",
-    category: "200",
-    address: "경남 김해시 어쩌고4",
-  },
-];
+const normalBtnStyle = {
+  backgroundColor: "#fff",
+  border: "solid 1px #333",
+  outline: "0 none",
+  borderRadius: "5px",
+  boxShadow: "2px 2px 1px 1px rgba(0, 0, 0, 0.5)",
+  margin: "0 5px 5px 0",
+};
 
-function MapComponent({ selectedCategory, selectedMarkerId, markUp }) {
+const selectedBtnStyle = {
+  ...normalBtnStyle,
+  backgroundColor: "#2780E3",
+  color: "white",
+};
+
+function MapComponent({ selectedCategory, selectedMarkerId, markUp, markers }) {
   const navermaps = useNavermaps();
   const [map, setMap] = useState(null);
+  const [scaleControl, setScaleControl] = useState(true);
 
   const center = new navermaps.LatLng(35.2481236, 128.9027787);
   return (
@@ -57,8 +38,25 @@ function MapComponent({ selectedCategory, selectedMarkerId, markUp }) {
         height: "600px",
       }}
     >
-      <NaverMap defaultCenter={center} defaultZoom={15} ref={setMap}>
-        {dummyMarkers
+      <button
+        style={scaleControl ? selectedBtnStyle : normalBtnStyle}
+        onClick={() => {
+          setScaleControl((prev) => !prev);
+        }}
+      >
+        모든 지도 컨트롤
+      </button>
+      <NaverMap
+        defaultCenter={center}
+        defaultZoom={15}
+        ref={setMap}
+        scaleControl={scaleControl}
+        logoControl={scaleControl}
+        mapDataControl={scaleControl}
+        mapTypeControl={scaleControl}
+        zoomControl={scaleControl}
+      >
+        {markers
           .filter((marker) => marker.category === selectedCategory)
           .map((marker) => {
             const isSelected = marker.id === selectedMarkerId;
@@ -68,7 +66,9 @@ function MapComponent({ selectedCategory, selectedMarkerId, markUp }) {
             return (
               <Marker
                 key={marker.id}
-                defaultPosition={new navermaps.LatLng(marker.lat, marker.lon)}
+                defaultPosition={
+                  new navermaps.LatLng(marker.latitude, marker.longitude)
+                }
                 onClick={() => markUp(marker)}
                 icon={markerIcon}
               />

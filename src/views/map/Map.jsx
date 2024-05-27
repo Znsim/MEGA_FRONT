@@ -1,4 +1,5 @@
 import { Button, ButtonGroup } from "@mui/material";
+import axios from "axios";
 import { Suspense, useEffect, useState } from "react";
 
 import { Loading } from "../../components/Loading";
@@ -9,6 +10,7 @@ import { MapDetail } from "./MapDetail";
 
 export const Map = () => {
   const { setSelectedMarker } = useMapStore();
+  const [markers, setMarkers] = useState([]);
 
   const [selectedMarkerId, setSelectedMarkerId] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("100");
@@ -22,12 +24,22 @@ export const Map = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      setTimeout(() => {
+      try {
+        const data = await axios.get(
+          "http://203.241.228.51:8000/map/hospitals/"
+        );
+        setMarkers(data.data);
         setLoading(false);
-      }, 1000);
+      } catch (e) {
+        alert(e);
+      }
     };
     fetchData();
   }, []);
+
+  useEffect(() => {
+    console.log(markers);
+  }, [markers]);
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
@@ -56,6 +68,7 @@ export const Map = () => {
             selectedCategory={selectedCategory}
             selectedMarkerId={selectedMarkerId}
             markUp={markUp}
+            markers={markers}
           />
           <MapDetail />
         </>

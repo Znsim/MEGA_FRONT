@@ -146,7 +146,7 @@ export const Header = () => {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Box>{isAuthenticated ? "Login" : "내일르"}</Box>
+                  <Box>{isAuthenticated ? "내 아이디" : "LOGIN"}</Box>
                 </IconButton>
               </Tooltip>
             </Box>

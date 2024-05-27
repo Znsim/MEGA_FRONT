@@ -1,15 +1,42 @@
 // pages/Login.jsx
 import { useAuthStore } from "../../store/useAuthStore";
-import { TextField, Button, Container, Typography, Grid } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Container,
+  Typography,
+  Grid,
+  Box,
+} from "@mui/material";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // 리디렉트를 위해 필요
+import { Link, useNavigate } from "react-router-dom"; // 리디렉트를 위해 필요
 import { routes } from "../../routes";
 
 export const Login = () => {
   const navigate = useNavigate();
   const { login } = useAuthStore();
+  const [value, setValue] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [usernameError, setUsernameError] = useState(false);
+
+  const dummyuser = [
+    {
+      id: 0,
+      username: "test1",
+      password: "test123",
+    },
+    {
+      id: 1,
+      username: "test2",
+      password: "test1234",
+    },
+    {
+      id: 2,
+      username: "test3",
+      password: "test12345",
+    },
+  ];
 
   const handleLogin = () => {
     login(); // 로그인 상태를 true로 설정
@@ -18,9 +45,19 @@ export const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("로그인 시도:", { username, password });
-    handleLogin(); // 실제 로그인 처리 로직을 handleLogin 함수 내에서 처리
+    if (/^[A-Za-z ]+$/.test(username)) {
+      setUsernameError(false);
+      console.log("Login attempt:", { username, password });
+      handleLogin(); // Actual login logic is handled inside handleLogin function
+    } else {
+      setUsernameError(true);
+    }
   };
+
+  // const validation = () => {
+  //   let check = /[~!@#$%^&*()_+|<>?:{}.,/;='"ㄱ-ㅎ | ㅏ-ㅣ |가-힣]/;
+  //   return check.test(value);
+  // };
 
   return (
     <Container maxWidth="xs">
@@ -28,16 +65,33 @@ export const Login = () => {
         <Typography variant="h4" align="center" gutterBottom>
           Login
         </Typography>
-        <form onSubmit={handleSubmit}>
+        <Box
+          component="form"
+          sx={{
+            "& .MuiTextField-root": { m: 1, width: "25ch" },
+          }}
+          noValidate
+          autoComplete="off"
+          onSubmit={handleSubmit}
+        >
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
                 label="Username"
                 fullWidth
-                value={username}
+                value={dummyuser.username}
                 onChange={(e) => setUsername(e.target.value)}
                 variant="outlined"
                 required
+                error={usernameError}
+                helperText={
+                  usernameError.toString()
+                    ? "특수기호나 한글은 입력 하실 수 없습니다."
+                    : ""
+                }
+                inputProps={{
+                  pattern: "[A-Za-z ]+", //문자와 공백만 허용
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -45,7 +99,7 @@ export const Login = () => {
                 label="Password"
                 type="password"
                 fullWidth
-                value={password}
+                value={dummyuser.password}
                 onChange={(e) => setPassword(e.target.value)}
                 variant="outlined"
                 required
@@ -62,7 +116,10 @@ export const Login = () => {
               </Button>
             </Grid>
           </Grid>
-        </form>
+        </Box>
+        <p>
+          아이디가 없으신가요? <Link to={routes.sign}>가입하기</Link>
+        </p>
       </div>
     </Container>
   );

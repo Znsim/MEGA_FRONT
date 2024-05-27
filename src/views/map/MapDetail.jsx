@@ -25,7 +25,7 @@ export const MapDetail = () => {
       }}
     >
       <div>
-        <Typography variant="h6">{selectedMarker.name}</Typography>
+        <Typography variant="h6">{selectedMarker.place_name}</Typography>
         <Typography variant="body2">{selectedMarker.address}</Typography>
       </div>
       <IconButton onClick={handleClose}>
