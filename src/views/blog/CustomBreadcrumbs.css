@@ -23,3 +23,8 @@
   .MuiTypography-root {
   margin-right: 10px; /* 글씨 간격 조절 */
 }
+
+/* 버튼이 클릭됐을 때 색상 변경 */
+.breadcrumbs-container .MuiButton-root:active {
+  color: blue;
+}

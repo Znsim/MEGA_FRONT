@@ -11,9 +11,14 @@ import { PageNotFound } from "./views/PageNotFound";
 import { Logout } from "./views/login/Logout";
 import { useAuthStore } from "./store/useAuthStore";
 import { BlogMain } from "./views/blog/BlogMain";
+<<<<<<< HEAD
 import { MyPage } from "./views/mypage/MyPage";
 import BlogWrite from "./views/blog/blogwrtie/BlogWrite";
 import InBlog from "./views/blog/inblog/InBlog";
+=======
+import  MyPage from "./views/mypage/Mypage";
+import  BlogWrite  from "./views/blog/blogwrtie/BlogWrite";
+>>>>>>> f9ffadeb829618c3196a652f06e9dba1585a5ffd
 
 function App() {
   const { isAuthenticated } = useAuthStore();
