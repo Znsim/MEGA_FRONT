@@ -28,7 +28,6 @@ function BlogWrite() {
       <div>
         <p><BlogUp/></p>
       </div>
-      <button onClick={handleBack}>뒤로 가기</button>
     </div>
   );
 }
