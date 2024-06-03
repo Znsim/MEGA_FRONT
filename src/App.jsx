@@ -8,17 +8,11 @@ import { Container, CssBaseline } from "@mui/material";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { PageNotFound } from "./views/PageNotFound";
-import { Logout } from "./views/login/Logout";
 import { useAuthStore } from "./store/useAuthStore";
 import { BlogMain } from "./views/blog/BlogMain";
-<<<<<<< HEAD
-import { MyPage } from "./views/mypage/MyPage";
 import BlogWrite from "./views/blog/blogwrtie/BlogWrite";
 import InBlog from "./views/blog/inblog/InBlog";
-=======
-import  MyPage from "./views/mypage/Mypage";
-import  BlogWrite  from "./views/blog/blogwrtie/BlogWrite";
->>>>>>> f9ffadeb829618c3196a652f06e9dba1585a5ffd
+// import { MyPage } from "./views/mypage/MyPage";
 
 function App() {
   const { isAuthenticated } = useAuthStore();
@@ -43,10 +37,9 @@ function App() {
             <Route path={routes.blog} element={<BlogMain />} />
             <Route path={routes.blogwrite} element={<BlogWrite />} />
             <Route path={routes.blogdetail} element={<InBlog />} />
-            <Route path={routes.mypage} element={<MyPage />} />
             <Route
-              path={routes.login}
-              element={isAuthenticated ? <MyPage /> : <Login />}
+              path={isAuthenticated ? routes.sign : routes.login}
+              element={isAuthenticated ? <PageNotFound /> : <Login />}
             />
             <Route path={routes.sign} element={<Sign />} />
             <Route path="/*" element={<PageNotFound />} />

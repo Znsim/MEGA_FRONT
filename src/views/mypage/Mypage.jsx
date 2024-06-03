@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { useAuthStore } from "../../store/useAuthStore";
 import { Logout } from "../login/Logout";
 
@@ -13,38 +12,37 @@ export const MyPage = () => {
 };
 
 //logout 버튼을 누르면 로그인 페이지로 넘어가기
-=======
-import React, { useState } from 'react';
-import Profile from './Profile';
+import React, { useState } from "react";
+import Profile from "./Profile";
 import "./Profile.css";
-import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Input from '@mui/material/Input';
+import Button from "@mui/material/Button";
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Input from "@mui/material/Input";
 
 const Mypage = () => {
   const [personProfile, setPersonProfile] = useState({
-    Me: '내정보',
-    name: '보호자 이름',
-    id: '아이디',
-    tel: '전화번호',
-    blogPosts: ['블로그 ', '내용', '입니다.']
+    Me: "내정보",
+    name: "보호자 이름",
+    id: "아이디",
+    tel: "전화번호",
+    blogPosts: ["블로그 ", "내용", "입니다."],
   });
 
   const [animalProfiles, setAnimalProfiles] = useState([
     {
-      name: '동물 이름 1',
-      species: '강아지',
-      bio: '성별',
+      name: "동물 이름 1",
+      species: "강아지",
+      bio: "성별",
       profilePic: null,
-    }
+    },
   ]);
   const [currentAnimalIndex, setCurrentAnimalIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
-  const [animalname, setAnimalName] = useState('');
-  const [animalType, setAnimalType] = useState('');
-  const [gender, setGender] = useState('');
+  const [animalname, setAnimalName] = useState("");
+  const [animalType, setAnimalType] = useState("");
+  const [gender, setGender] = useState("");
   const [photo, setPhoto] = useState(null);
 
   const updateAnimalProfile = (updatedAnimalProfile) => {
@@ -67,7 +65,9 @@ const Mypage = () => {
   };
 
   const nextAnimalProfile = () => {
-    setCurrentAnimalIndex((prevIndex) => (prevIndex + 1) % animalProfiles.length);
+    setCurrentAnimalIndex(
+      (prevIndex) => (prevIndex + 1) % animalProfiles.length
+    );
   };
 
   const openModal = () => {
@@ -90,22 +90,26 @@ const Mypage = () => {
   };
 
   const modalStyle = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
     width: 400,
-    bgcolor: 'background.paper',
+    bgcolor: "background.paper",
     boxShadow: 24,
     p: 4,
-    borderRadius: '4px',
+    borderRadius: "4px",
   };
 
   return (
     <div className="profile-page">
       <div className="animal-profile-navigation">
-        <Button variant="text" onClick={nextAnimalProfile}>다음</Button>
-        <Button variant="text" onClick={openModal}>추가</Button>
+        <Button variant="text" onClick={nextAnimalProfile}>
+          다음
+        </Button>
+        <Button variant="text" onClick={openModal}>
+          추가
+        </Button>
         <Modal open={isOpen} onClose={closeModal}>
           <Box sx={modalStyle}>
             <div className="popup-content">
@@ -140,15 +144,27 @@ const Mypage = () => {
                 margin="normal"
                 onChange={handlePhotoChange}
               />
-              <Button variant="text" onClick={addAnimalProfile}>완료</Button>
-              <Button variant="text" onClick={closeModal}>닫기</Button>
+              <Button variant="text" onClick={addAnimalProfile}>
+                완료
+              </Button>
+              <Button variant="text" onClick={closeModal}>
+                닫기
+              </Button>
             </div>
           </Box>
         </Modal>
       </div>
       <div className="profiles">
-        <Profile user={animalProfiles[currentAnimalIndex]} updateUser={updateAnimalProfile} isPet={true} />
-        <Profile user={personProfile} updateUser={setPersonProfile} isPet={false} />
+        <Profile
+          user={animalProfiles[currentAnimalIndex]}
+          updateUser={updateAnimalProfile}
+          isPet={true}
+        />
+        <Profile
+          user={personProfile}
+          updateUser={setPersonProfile}
+          isPet={false}
+        />
       </div>
       <div className="blog-section">
         <h3>내가 쓴 블로그</h3>
@@ -165,6 +181,3 @@ const Mypage = () => {
     </div>
   );
 };
-
-export default Mypage;
->>>>>>> f9ffadeb829618c3196a652f06e9dba1585a5ffd
