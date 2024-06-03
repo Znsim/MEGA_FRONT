@@ -1,17 +1,5 @@
 import { useAuthStore } from "../../store/useAuthStore";
 import { Logout } from "../login/Logout";
-
-export const MyPage = () => {
-  const { isAuthenticated, username } = useAuthStore();
-  return (
-    <>
-      <p> {isAuthenticated ? username : "LOGIN"} 마이페이지</p>
-      {isAuthenticated ? <Logout /> : null}
-    </>
-  );
-};
-
-//logout 버튼을 누르면 로그인 페이지로 넘어가기
 import React, { useState } from "react";
 import Profile from "./Profile";
 import "./Profile.css";
@@ -21,7 +9,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Input from "@mui/material/Input";
 
-const Mypage = () => {
+export const Mypage = () => {
   const [personProfile, setPersonProfile] = useState({
     Me: "내정보",
     name: "보호자 이름",
@@ -44,6 +32,7 @@ const Mypage = () => {
   const [animalType, setAnimalType] = useState("");
   const [gender, setGender] = useState("");
   const [photo, setPhoto] = useState(null);
+  const { isAuthenticated, username } = useAuthStore();
 
   const updateAnimalProfile = (updatedAnimalProfile) => {
     setAnimalProfiles((prevProfiles) => {
@@ -118,7 +107,7 @@ const Mypage = () => {
                 label="반려동물 이름"
                 variant="outlined"
                 fullWidth
-                margin="normal"
+                margin="dense"
                 value={animalname}
                 onChange={(e) => setAnimalName(e.target.value)}
               />
@@ -126,7 +115,7 @@ const Mypage = () => {
                 label="반려동물 종"
                 variant="outlined"
                 fullWidth
-                margin="normal"
+                margin="dense"
                 value={animalType}
                 onChange={(e) => setAnimalType(e.target.value)}
               />
@@ -134,14 +123,14 @@ const Mypage = () => {
                 label="성별"
                 variant="outlined"
                 fullWidth
-                margin="normal"
+                margin="dense"
                 value={gender}
                 onChange={(e) => setGender(e.target.value)}
               />
               <Input
                 type="file"
                 fullWidth
-                margin="normal"
+                margin="dense"
                 onChange={handlePhotoChange}
               />
               <Button variant="text" onClick={addAnimalProfile}>
@@ -178,6 +167,8 @@ const Mypage = () => {
           <p>No blog posts</p>
         )}
       </div>
+      <p>{isAuthenticated ? <Logout /> : null}</p>
+      <p>${isAuthenticated ? username : "LOGIN"}</p>
     </div>
   );
 };

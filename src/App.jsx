@@ -12,7 +12,7 @@ import { useAuthStore } from "./store/useAuthStore";
 import { BlogMain } from "./views/blog/BlogMain";
 import BlogWrite from "./views/blog/blogwrtie/BlogWrite";
 import InBlog from "./views/blog/inblog/InBlog";
-// import { MyPage } from "./views/mypage/MyPage";
+import { Mypage } from "./views/mypage/Mypage";
 
 function App() {
   const { isAuthenticated } = useAuthStore();
@@ -38,8 +38,8 @@ function App() {
             <Route path={routes.blogwrite} element={<BlogWrite />} />
             <Route path={routes.blogdetail} element={<InBlog />} />
             <Route
-              path={isAuthenticated ? routes.sign : routes.login}
-              element={isAuthenticated ? <PageNotFound /> : <Login />}
+              path={isAuthenticated ? routes.mypage : routes.login}
+              element={isAuthenticated ? <Mypage /> : <Login />}
             />
             <Route path={routes.sign} element={<Sign />} />
             <Route path="/*" element={<PageNotFound />} />
