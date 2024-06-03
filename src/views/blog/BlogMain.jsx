@@ -1,5 +1,5 @@
 import React from "react";
-import { RecipeReviewCard } from "./RecipeReviewCard";
+import  RecipeReviewCard  from "./RecipeReviewCard";
 import { RadioButtons } from "./RadioButtons";
 import { CustomBreadcrumbs } from "./CustomBreadcrumbs";
 import { Box, Fab } from "@mui/material"; // Fab과 Box를 한 줄로 임포트
@@ -7,7 +7,6 @@ import AddIcon from "@mui/icons-material/Add"; // AddIcon을 올바르게 임포
 import { useNavigate } from "react-router-dom";
 
 import "./BlogMain.css";
-import { routes } from "../../routes";
 //import { AltRoute } from "@mui/icons-material";
 
 export const BlogMain = () => {
@@ -15,7 +14,7 @@ export const BlogMain = () => {
   const navigate = useNavigate();
 
   const blogwriteOpen = () => {
-    navigate(routes.blogwrite);
+    navigate('/BlogWrite');
   };
   
 
@@ -28,9 +27,7 @@ export const BlogMain = () => {
   return (
     <>
       <div>
-        <div>
-          <RadioButtons />
-        </div>
+        
         <div className="App">
           <CustomBreadcrumbs />
         </div>

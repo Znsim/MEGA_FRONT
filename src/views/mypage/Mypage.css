@@ -1,0 +1,73 @@
+.profile-page {
+  padding: 20px;
+}
+
+.profiles {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px; /* 프로필 사이의 간격 */
+  margin-bottom: 20px; /* 블로그 섹션과의 간격 */
+}
+
+.profile {
+  width: 45%; /* 프로필 너비를 각각 45%로 설정 */
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.profile h1 {
+  margin: 0 0 10px;
+}
+
+.profile p {
+  margin: 5px 0;
+}
+
+.profile-pic {
+  margin-top: 20px;
+}
+
+.profile-pic img {
+  max-width: 100px; /* 이미지의 최대 너비 */
+  height: auto; /* 높이를 자동으로 조정하여 이미지 비율 유지 */
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.round-img {
+  width: 100px; /* 원하는 크기로 설정 */
+  height: 100px; /* 원하는 크기로 설정 */
+  border-radius: 50%; /* 동그랗게 만들기 */
+  object-fit: cover; /* 이미지가 컨테이너에 맞게 자르기 */
+  margin-top: 10px;
+}
+
+.blog-section {
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+  text-align: left;
+}
+
+.blog-section h3 {
+  margin-top: 0;
+}
+
+.blog-section ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+.blog-section li {
+  margin-bottom: 10px;
+}
+
+.animal-profile-navigation {
+  text-align: left; /* 내부 요소들을 왼쪽으로 정렬 */
+}
+
+.animal-profile-navigation button {
+  margin-right: 10px; /* 버튼 사이의 간격을 추가 */
+  color: black;
+  border: 1px solid black;
+}

@@ -11,7 +11,7 @@ import { PageNotFound } from "./views/PageNotFound";
 import { Logout } from "./views/login/Logout";
 import { useAuthStore } from "./store/useAuthStore";
 import { BlogMain } from "./views/blog/BlogMain";
-import { MyPage } from "./views/mypage/Mypage";
+import  MyPage from "./views/mypage/Mypage";
 import  BlogWrite  from "./views/blog/blogwrtie/BlogWrite";
 
 function App() {

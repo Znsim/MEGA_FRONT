@@ -2,10 +2,17 @@ import React from 'react';
 import BlogKate from './BlogKate';
 import BlogTitle from './BlogTitle';
 import { BlogUp } from './BlogUp';
+import { useNavigate } from "react-router-dom";
+
 function BlogWrite() {
   //const { index } = useParams();
   //const blog = blogData[index];
 
+  const navigate = useNavigate();
+
+  const handleBack = () => {
+    navigate('/BlogMain');
+  };
   
   return (
     <div>
@@ -21,6 +28,7 @@ function BlogWrite() {
       <div>
         <p><BlogUp/></p>
       </div>
+      <button onClick={handleBack}>뒤로 가기</button>
     </div>
   );
 }
