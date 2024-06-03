@@ -11,8 +11,9 @@ import { PageNotFound } from "./views/PageNotFound";
 import { Logout } from "./views/login/Logout";
 import { useAuthStore } from "./store/useAuthStore";
 import { BlogMain } from "./views/blog/BlogMain";
-import { MyPage } from "./views/mypage/Mypage";
-import  BlogWrite  from "./views/blog/blogwrtie/BlogWrite";
+import { MyPage } from "./views/mypage/MyPage";
+import BlogWrite from "./views/blog/blogwrtie/BlogWrite";
+import InBlog from "./views/blog/inblog/InBlog";
 
 function App() {
   const { isAuthenticated } = useAuthStore();
@@ -35,7 +36,8 @@ function App() {
             <Route path={routes.home} element={<Home />} />
             <Route path={routes.map} element={<Map />} />
             <Route path={routes.blog} element={<BlogMain />} />
-            <Route path={routes.blogwrite} element={<BlogWrite/>}/>
+            <Route path={routes.blogwrite} element={<BlogWrite />} />
+            <Route path={routes.blogdetail} element={<InBlog />} />
             <Route path={routes.mypage} element={<MyPage />} />
             <Route
               path={routes.login}

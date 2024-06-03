@@ -37,9 +37,9 @@ export const Map = () => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    console.log(markers);
-  }, [markers]);
+  // useEffect(() => {
+  //   console.log(markers);
+  // }, [markers]);
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);

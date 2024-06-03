@@ -25,7 +25,7 @@ const views = [
 export const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const { isAuthenticated } = useAuthStore();
+  const { isAuthenticated, username } = useAuthStore();
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -46,6 +46,7 @@ export const Header = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
   return (
     <>
       <AppBar
@@ -74,11 +75,11 @@ export const Header = () => {
             <Box
               sx={{
                 flexGrow: 1,
-                display: { xs: "flex", md: "none" },
+                display: { xs: "none", md: "flex" },
                 color: "#000",
               }}
             >
-              <IconButton
+              {/* <IconButton
                 size="large"
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
@@ -86,7 +87,7 @@ export const Header = () => {
                 onClick={handleOpenNavMenu}
               >
                 <DragHandle style={{ color: "#000" }} />
-              </IconButton>
+              </IconButton> */}
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorElNav}
@@ -102,16 +103,16 @@ export const Header = () => {
                 open={Boolean(anchorElNav)}
                 onClose={handleCloseNavMenu}
                 sx={{
-                  display: { xs: "block", md: "none" },
+                  display: { xs: "none", md: "block" },
                 }}
               >
-                {views.map((views) => (
+                {views.map((view) => (
                   <Button
-                    key={views.english}
-                    onClick={() => handleCloseNavMenu(views.english)}
+                    key={view.english}
+                    onClick={() => handleCloseNavMenu(view.english)}
                     style={{ color: "#000" }}
                   >
-                    {views.korean}
+                    {view.korean}
                   </Button>
                 ))}
               </Menu>
@@ -129,24 +130,25 @@ export const Header = () => {
                 letterSpacing: ".3rem",
                 color: "inherit",
                 textDecoration: "none",
+                justifyContent: "center",
               }}
             >
               <LOGO sx={{ maxWidth: 200 }} />
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {views.map((views) => (
+              {views.map((view) => (
                 <Button
-                  key={views.english}
-                  onClick={() => handleCloseNavMenu(views.english)}
+                  key={view.english}
+                  onClick={() => handleCloseNavMenu(view.english)}
                 >
-                  {views.korean}
+                  {view.korean}
                 </Button>
               ))}
             </Box>
-            <Box sx={{ flexGrow: 0 }}>
+            <Box sx={{ flexGrow: 0, display: { xs: "none", md: "block" } }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Box>{isAuthenticated ? "내 아이디" : "LOGIN"}</Box>
+                  <Box>{isAuthenticated ? username : "LOGIN"}</Box>
                 </IconButton>
               </Tooltip>
             </Box>

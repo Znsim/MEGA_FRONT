@@ -20,7 +20,7 @@ export const MapDetail = () => {
         justifyContent: "space-between",
         backgroundColor: "white",
         borderTop: "1px solid #ccc",
-        width: "100%", // 화면 너비 전체 사용
+        width: "100%",
         boxSizing: "border-box", // 패딩과 테두리 포함 너비 유지
       }}
     >

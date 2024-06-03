@@ -19,6 +19,7 @@ export const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [usernameError, setUsernameError] = useState(false);
+  const [loginError, setLoginError] = useState(false);
 
   const dummyuser = [
     {
@@ -39,25 +40,34 @@ export const Login = () => {
   ];
 
   const handleLogin = () => {
-    login(); // 로그인 상태를 true로 설정
+    login(username, password); // 사용자 이름과 비밀번호를 함께 전달
     navigate(routes.mypage); // 마이페이지로 리디렉트
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (/^[A-Za-z ]+$/.test(username)) {
-      setUsernameError(false);
-      console.log("Login attempt:", { username, password });
-      handleLogin(); // Actual login logic is handled inside handleLogin function
-    } else {
+    // 유효성 검사를 수행하여 에러가 있을 경우 에러 메시지를 설정
+    if (!/^[A-Za-z0-9 ]+$/.test(username)) {
       setUsernameError(true);
+      setLoginError(true); // 로그인 에러 설정
+      return; // 유효성 검사 실패 시 함수 종료
+    }
+
+    // dummyuser 배열에서 사용자 찾기
+    const user = dummyuser.find(
+      (user) => user.username === username && user.password === password
+    );
+
+    if (user) {
+      setUsernameError(false);
+      setLoginError(false); // 로그인 에러 초기화
+      console.log("Login successful:", { username, password });
+      handleLogin(); // 로그인 성공 시 handleLogin 함수 호출
+    } else {
+      setLoginError(true); // 로그인 에러 설정
+      console.log("Login failed: Invalid credentials");
     }
   };
-
-  // const validation = () => {
-  //   let check = /[~!@#$%^&*()_+|<>?:{}.,/;='"ㄱ-ㅎ | ㅏ-ㅣ |가-힣]/;
-  //   return check.test(value);
-  // };
 
   return (
     <Container maxWidth="xs">
@@ -79,7 +89,7 @@ export const Login = () => {
               <TextField
                 label="Username"
                 fullWidth
-                value={dummyuser.username}
+                value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 variant="outlined"
                 required
@@ -99,7 +109,7 @@ export const Login = () => {
                 label="Password"
                 type="password"
                 fullWidth
-                value={dummyuser.password}
+                value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 variant="outlined"
                 required
@@ -117,6 +127,11 @@ export const Login = () => {
             </Grid>
           </Grid>
         </Box>
+        {loginError && (
+          <Typography color="error" variant="body2" sx={{ mt: 3 }}>
+            로그인 실패: 사용자 이름 또는 비밀번호가 잘못되었습니다.
+          </Typography>
+        )}
         <p>
           아이디가 없으신가요? <Link to={routes.sign}>가입하기</Link>
         </p>

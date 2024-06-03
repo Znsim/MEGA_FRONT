@@ -30,12 +30,18 @@ export const PageNotFound = () => {
           alt="Page Not Found"
           style={{
             width: isMobile ? "60%" : "80%",
-            borderRadius: "10vh",
             overflow: "hidden",
           }}
         />
 
-        <Typography sx={{ fontFamily: "KCC-Ganpan", fontSize: "50px" }}>
+        <Typography
+          sx={{
+            fontFamily: "KCC-Ganpan",
+            fontSize: "50px",
+
+            m: "10px 0",
+          }}
+        >
           404
         </Typography>
       </Box>
