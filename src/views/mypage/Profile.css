@@ -72,3 +72,9 @@
     border: 1px solid black;
   }
   
+  .logout-button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+  }
+  

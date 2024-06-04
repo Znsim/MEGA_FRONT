@@ -10,10 +10,7 @@ function BlogWrite() {
 
   const navigate = useNavigate();
 
-  const handleBack = () => {
-    navigate('/BlogMain');
-  };
-  
+
   return (
     <div>
       <h1>블로그 작성</h1>
