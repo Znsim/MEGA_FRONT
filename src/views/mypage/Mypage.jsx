@@ -8,6 +8,7 @@ import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Input from "@mui/material/Input";
+import axios from "axios";
 
 export const Mypage = () => {
   const [personProfile, setPersonProfile] = useState({
@@ -42,15 +43,27 @@ export const Mypage = () => {
     });
   };
 
-  const addAnimalProfile = () => {
+  const addAnimalProfile = async () => {
     const newAnimalProfile = {
-      name: animalname,
-      species: animalType,
-      bio: gender,
-      profilePic: photo,
+      // pet_id: 1,
+      pet_name: animalname,
+      pet_type: animalType,
+      sex: gender,
+      img: photo,
     };
-    setAnimalProfiles((prevProfiles) => [...prevProfiles, newAnimalProfile]);
-    closeModal();
+
+    try {
+      const response = await axios.post(
+        "http://203.241.228.51:8000/mypage/pets/",
+        newAnimalProfile
+      );
+      console.log(response.data); // 서버로부터의 응답 확인
+      setAnimalProfiles((prevProfiles) => [...prevProfiles, newAnimalProfile]);
+      closeModal();
+    } catch (error) {
+      console.error("Error adding animal profile:", error);
+      // 에러 처리 로직 추가
+    }
   };
 
   const nextAnimalProfile = () => {
@@ -168,7 +181,7 @@ export const Mypage = () => {
         )}
       </div>
       <p>{isAuthenticated ? <Logout /> : null}</p>
-      <p>${isAuthenticated ? username : "LOGIN"}</p>
+      <p>{isAuthenticated ? username : "LOGIN"}</p>
     </div>
   );
 };
