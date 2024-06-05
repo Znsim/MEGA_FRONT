@@ -3,13 +3,10 @@ import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-//import Input from "@mui/material/Input";
 import Profile from "./Profile";
 import { useAuthStore } from "../../store/useAuthStore";
 import { useLogout } from "../login/Logout";
 import "./Profile.css"; // CSS 파일 import
-
-// import axios from 'axios';
 
 export const Mypage = () => {
   const [personProfile, setPersonProfile] = useState({
@@ -37,7 +34,7 @@ export const Mypage = () => {
   const [gender, setGender] = useState("");
   const [photo, setPhoto] = useState(null);
 
-  const { isAuthenticated, username } = useAuthStore();
+  const { isAuthenticated, email } = useAuthStore();
 
   const updateAnimalProfile = (updatedAnimalProfile) => {
     setAnimalProfiles((prevProfiles) => {
@@ -251,7 +248,7 @@ export const Mypage = () => {
           <p>No blog posts</p>
         )}
       </div>
-      <p>{isAuthenticated ? username : "LOGIN"}</p>
+      <p>{isAuthenticated ? email : "LOGIN"}</p>
     </div>
   );
 };

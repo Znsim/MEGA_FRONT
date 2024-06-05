@@ -10,14 +10,12 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuthStore } from "../../store/useAuthStore";
+import { useNavigate } from "react-router-dom";
 import { routes } from "../../routes";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 export const Sign = () => {
   const navigate = useNavigate();
-  const login = useAuthStore((state) => state.login);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -35,12 +33,10 @@ export const Sign = () => {
     if (password !== passwordConfirmation) {
       setFormError("Passwords do not match.");
       return;
-    } else {
-      setFormError("");
     }
 
     const formData = {
-      username,
+      /* username, */ // Ensure username is included in formData
       email,
       password1: password,
       password2: passwordConfirmation,
@@ -53,11 +49,8 @@ export const Sign = () => {
       );
       console.log("회원가입 성공:", response.data);
 
-      // Login the user by calling your login function
-      login(username, password);
-
-      // Navigate to the mypage route
-      navigate(routes.mypage);
+      // Navigate to the login page instead of logging the user in directly
+      navigate(routes.login);
     } catch (e) {
       console.error("회원가입 실패:", e);
       if (e.response && e.response.data) {
@@ -82,17 +75,17 @@ export const Sign = () => {
           onSubmit={handleSubmit}
         >
           <Grid container spacing={2}>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <TextField
                 label="아이디"
                 type="text"
                 fullWidth
                 value={username}
-                onChange={setUsername}
+                onChange={(e) => setUsername(e.target.value)}
                 variant="outlined"
                 required
               />
-            </Grid>
+            </Grid> */}
             <Grid item xs={12}>
               <TextField
                 label="이메일"
@@ -174,125 +167,3 @@ export const Sign = () => {
     </Container>
   );
 };
-
-// import React, { useState, useEffect } from "react";
-// import axios from "axios";
-
-// export const Sign = () => {
-//   const [username, setUsername] = useState("");
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [confirmPassword, setConfirmPassword] = useState("");
-//   const [message, setMessage] = useState("");
-//   const [payload, setPayload] = useState(null);
-//   const [loading, setLoading] = useState(false);
-
-//   const handleRegister = (e) => {
-//     e.preventDefault();
-//     if (password !== confirmPassword) {
-//       setMessage("비밀번호가 일치하지 않습니다.");
-//       return;
-//     }
-
-//     setPayload({
-//       username: username, // username 값을 추가
-//       email: email,
-//       password1: password,
-//       password2: confirmPassword,
-//     });
-//   };
-
-//   useEffect(() => {
-//     const postData = async () => {
-//       if (!payload) return;
-
-//       setLoading(true);
-//       setMessage("");
-
-//       try {
-//         console.log("보내는 데이터:", payload); // 로그 추가
-//         const response = await axios.post(
-//           "http://203.241.228.51:8000/api/accounts/v1/registration/",
-//           payload,
-//           {
-//             headers: {
-//               "Content-Type": "application/json",
-//               Accept: "application/json",
-//             },
-//           }
-//         );
-//         if (response.status === 201) {
-//           setMessage("회원가입 성공");
-//           setUsername("");
-//           setEmail("");
-//           setPassword("");
-//           setConfirmPassword("");
-//         } else {
-//           setMessage("회원가입 실패");
-//         }
-//       } catch (error) {
-//         console.error(
-//           "회원가입 오류:",
-//           error.response ? error.response.data : error.message
-//         ); // 오류 로그 추가
-//         setMessage(
-//           `회원가입 실패: ${
-//             error.response ? error.response.data : error.message
-//           }`
-//         );
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-
-//     postData();
-//   }, [payload]);
-
-//   return (
-//     <div>
-//       <h2>회원가입</h2>
-//       <form onSubmit={handleRegister}>
-//         <div>
-//           <label>사용자 이름:</label>
-//           <input
-//             type="text"
-//             value={username}
-//             onChange={(e) => setUsername(e.target.value)}
-//             required
-//           />
-//         </div>
-//         <div>
-//           <label>이메일:</label>
-//           <input
-//             type="email"
-//             value={email}
-//             onChange={(e) => setEmail(e.target.value)}
-//             required
-//           />
-//         </div>
-//         <div>
-//           <label>비밀번호:</label>
-//           <input
-//             type="password"
-//             value={password}
-//             onChange={(e) => setPassword(e.target.value)}
-//             required
-//           />
-//         </div>
-//         <div>
-//           <label>비밀번호 확인:</label>
-//           <input
-//             type="password"
-//             value={confirmPassword}
-//             onChange={(e) => setConfirmPassword(e.target.value)}
-//             required
-//           />
-//         </div>
-//         <button type="submit" disabled={loading}>
-//           {loading ? "회원가입 중..." : "회원가입"}
-//         </button>
-//       </form>
-//       {message && <p>{message}</p>}
-//     </div>
-//   );
-// };

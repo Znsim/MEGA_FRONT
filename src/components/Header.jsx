@@ -14,7 +14,6 @@ import { useState } from "react";
 import { LOGO } from "./LOGO";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store/useAuthStore";
-import { DragHandle } from "@mui/icons-material";
 import { routes } from "../routes";
 
 const views = [
@@ -25,22 +24,24 @@ const views = [
 export const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const { isAuthenticated, username } = useAuthStore();
+  const { isAuthenticated, email } = useAuthStore();
+  const navigate = useNavigate();
+
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
-  };
-  const navigate = useNavigate();
-  const handleOpenUserMenu = () => {
-    if (isAuthenticated) {
-      navigate(routes.mypage); // 마이페이지로 이동
-    } else {
-      navigate(routes.login); // 로그인 페이지로 이동
-    }
   };
 
   const handleCloseNavMenu = (slug) => {
     navigate(slug);
     setAnchorElNav(null);
+  };
+
+  const handleOpenUserMenu = () => {
+    if (isAuthenticated) {
+      navigate(routes.mypage);
+    } else {
+      navigate(routes.login);
+    }
   };
 
   const handleCloseUserMenu = () => {
@@ -79,15 +80,6 @@ export const Header = () => {
                 color: "#000",
               }}
             >
-              {/* <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-              >
-                <DragHandle style={{ color: "#000" }} />
-              </IconButton> */}
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorElNav}
@@ -148,7 +140,7 @@ export const Header = () => {
             <Box sx={{ flexGrow: 0, display: { xs: "none", md: "block" } }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Box>{isAuthenticated ? username : "LOGIN"}</Box>
+                  <Box>{isAuthenticated ? email : "LOGIN"}</Box>
                 </IconButton>
               </Tooltip>
             </Box>

@@ -1,9 +1,9 @@
-import { Photo } from '@mui/icons-material';
-import React, { useState } from 'react';
+import { Photo } from "@mui/icons-material";
+import React, { useState } from "react";
 
-const Profile = ({ user, updateUser, isPet, isAuthenticated, username }) => {
+const Profile = ({ user, updateUser, isPet, isAuthenticated, email }) => {
   // const [profilePic, setProfilePic] = useState(user.profilePic);
-  
+
   const handleProfilePicChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -20,16 +20,15 @@ const Profile = ({ user, updateUser, isPet, isAuthenticated, username }) => {
     <div className="profile">
       <h1>{user.name}</h1>
       {isPet ? (
-          <p>반려동물 종: {user.species}</p>
-        
+        <p>반려동물 종: {user.species}</p>
       ) : (
-         <p>{isAuthenticated ? username : " 로그인.."}</p>
+        <p>{isAuthenticated ? email : " 로그인.."}</p>
       )}
 
       {isPet ? (
-        <p>
+        <div>
           <p>성별: {user.bio}</p>
-        </p>
+        </div>
       ) : (
         <p>전화번호: {user.tel}</p>
       )}
