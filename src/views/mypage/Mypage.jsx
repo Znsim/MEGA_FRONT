@@ -13,8 +13,8 @@ export const Mypage = () => {
     Me: "내정보",
     name: "보호자 이름",
     id: "아이디",
-    tel: "전화번호",
-    blogPosts: ["블로그 ", "내용", "입니다."],
+    email: "이메일",
+    blogPosts: null,
   });
 
   const [animalProfiles, setAnimalProfiles] = useState([

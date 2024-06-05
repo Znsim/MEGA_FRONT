@@ -30,7 +30,7 @@ const Profile = ({ user, updateUser, isPet, isAuthenticated, email }) => {
           <p>성별: {user.bio}</p>
         </div>
       ) : (
-        <p>전화번호: {user.tel}</p>
+        <p>이메일: {user.email}</p>
       )}
     </div>
   );

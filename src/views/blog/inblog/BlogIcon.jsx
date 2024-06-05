@@ -4,6 +4,9 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 
 const BlogText = () => {
+
+  
+
   return (
     <div>
       <div style={{textAlign:'right',marginTop: '16px'}}>
@@ -16,6 +19,8 @@ const BlogText = () => {
       </div>
     </div>
   );
+
+  
 }
 
 export default BlogText;
