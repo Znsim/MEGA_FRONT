@@ -1,14 +1,15 @@
-import { useAuthStore } from "../../store/useAuthStore";
-import { Logout } from "../login/Logout";
 import React, { useState } from "react";
-import Profile from "./Profile";
-import "./Profile.css";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import Input from "@mui/material/Input";
-import axios from "axios";
+//import Input from "@mui/material/Input";
+import Profile from "./Profile";
+import { useAuthStore } from "../../store/useAuthStore";
+import { useLogout } from "../login/Logout";
+import "./Profile.css"; // CSS 파일 import
+
+// import axios from 'axios';
 
 export const Mypage = () => {
   const [personProfile, setPersonProfile] = useState({
@@ -27,12 +28,15 @@ export const Mypage = () => {
       profilePic: null,
     },
   ]);
+
   const [currentAnimalIndex, setCurrentAnimalIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
+  const [istnwjdOpen, settnwjdIsOpen] = useState(false);
   const [animalname, setAnimalName] = useState("");
   const [animalType, setAnimalType] = useState("");
   const [gender, setGender] = useState("");
   const [photo, setPhoto] = useState(null);
+
   const { isAuthenticated, username } = useAuthStore();
 
   const updateAnimalProfile = (updatedAnimalProfile) => {
@@ -41,29 +45,34 @@ export const Mypage = () => {
       newProfiles[currentAnimalIndex] = updatedAnimalProfile;
       return newProfiles;
     });
+    closetnwjdModal();
   };
 
-  const addAnimalProfile = async () => {
-    const newAnimalProfile = {
-      // pet_id: 1,
-      pet_name: animalname,
-      pet_type: animalType,
-      sex: gender,
-      img: photo,
+  const tnwjdupdateProfile = () => {
+    const updatedAnimalProfile = {
+      ...animalProfiles[currentAnimalIndex],
+      name: animalname || animalProfiles[currentAnimalIndex].name,
+      species: animalType || animalProfiles[currentAnimalIndex].species,
+      bio: gender || animalProfiles[currentAnimalIndex].bio,
+      profilePic: photo || animalProfiles[currentAnimalIndex].profilePic,
     };
+    updateAnimalProfile(updatedAnimalProfile);
+  };
 
-    try {
-      const response = await axios.post(
-        "http://203.241.228.51:8000/mypage/pets/",
-        newAnimalProfile
-      );
-      console.log(response.data); // 서버로부터의 응답 확인
-      setAnimalProfiles((prevProfiles) => [...prevProfiles, newAnimalProfile]);
-      closeModal();
-    } catch (error) {
-      console.error("Error adding animal profile:", error);
-      // 에러 처리 로직 추가
-    }
+  const addAnimalProfile = () => {
+    const newAnimalProfile = {
+      name: animalname,
+      species: animalType,
+      bio: gender,
+      profilePic: photo,
+    };
+    setAnimalProfiles((prevProfiles) => [...prevProfiles, newAnimalProfile]);
+    closeModal();
+
+    setAnimalName("");
+    setAnimalType("");
+    setGender("");
+    setPhoto(null);
   };
 
   const nextAnimalProfile = () => {
@@ -80,15 +89,12 @@ export const Mypage = () => {
     setIsOpen(false);
   };
 
-  const handlePhotoChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPhoto(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
+  const opentnwjdModal = () => {
+    settnwjdIsOpen(true);
+  };
+
+  const closetnwjdModal = () => {
+    settnwjdIsOpen(false);
   };
 
   const modalStyle = {
@@ -103,21 +109,41 @@ export const Mypage = () => {
     borderRadius: "4px",
   };
 
+  const handleLogout = useLogout();
+
   return (
     <div className="profile-page">
-      <div className="animal-profile-navigation">
+      <div
+        className="animal-profile-navigation"
+        style={{ display: "flex", alignItems: "center" }}
+      >
         <Button variant="text" onClick={nextAnimalProfile}>
           다음
         </Button>
         <Button variant="text" onClick={openModal}>
           추가
         </Button>
+        <Button variant="text" onClick={opentnwjdModal}>
+          수정
+        </Button>
+        <div style={{ marginLeft: "auto" }}>
+          {isAuthenticated ? (
+            <Button
+              variant="text"
+              onClick={handleLogout}
+              className="logout-button"
+            >
+              로그아웃
+            </Button>
+          ) : null}
+        </div>
         <Modal open={isOpen} onClose={closeModal}>
           <Box sx={modalStyle}>
             <div className="popup-content">
-              <h1>모달</h1>
+              <h1>정보 추가</h1>
               <TextField
-                label="반려동물 이름"
+                // label="반려동물 이름"
+                placeholder="반려동물 이름"
                 variant="outlined"
                 fullWidth
                 margin="dense"
@@ -125,7 +151,8 @@ export const Mypage = () => {
                 onChange={(e) => setAnimalName(e.target.value)}
               />
               <TextField
-                label="반려동물 종"
+                // label="반려동물 종"
+                placeholder="반려동물 종"
                 variant="outlined"
                 fullWidth
                 margin="dense"
@@ -133,19 +160,15 @@ export const Mypage = () => {
                 onChange={(e) => setAnimalType(e.target.value)}
               />
               <TextField
-                label="성별"
+                // label="성별"
+                placeholder="성별"
                 variant="outlined"
                 fullWidth
                 margin="dense"
                 value={gender}
                 onChange={(e) => setGender(e.target.value)}
               />
-              <Input
-                type="file"
-                fullWidth
-                margin="dense"
-                onChange={handlePhotoChange}
-              />
+
               <Button variant="text" onClick={addAnimalProfile}>
                 완료
               </Button>
@@ -156,6 +179,53 @@ export const Mypage = () => {
           </Box>
         </Modal>
       </div>
+
+      <div>
+        <Modal open={istnwjdOpen} onClose={closetnwjdModal}>
+          <Box sx={modalStyle}>
+            <div className="popup-content">
+              <h1>정보 수정</h1>
+              <TextField
+                // label=""
+                placeholder="반려동물 이름"
+                variant="outlined"
+                fullWidth
+                margin="dense"
+                defaultValue={animalProfiles[currentAnimalIndex]?.name}
+                // value={ || ''}
+                onChange={(e) => setAnimalName(e.target.value)}
+              />
+              <TextField
+                // label="반려동물 종"
+                placeholder="반려동물 종"
+                variant="outlined"
+                fullWidth
+                margin="dense"
+                defaultValue={animalProfiles[currentAnimalIndex]?.species || ""}
+                onChange={(e) => setAnimalType(e.target.value)}
+              />
+              <TextField
+                // label="성별"
+                placeholder="성별"
+                variant="outlined"
+                fullWidth
+                margin="dense"
+                defaultValue={animalProfiles[currentAnimalIndex]?.bio || ""}
+                onChange={(e) => setGender(e.target.value)}
+              />
+
+              <Button variant="text" onClick={tnwjdupdateProfile}>
+                완료
+              </Button>
+
+              <Button variant="text" onClick={closetnwjdModal}>
+                닫기
+              </Button>
+            </div>
+          </Box>
+        </Modal>
+      </div>
+
       <div className="profiles">
         <Profile
           user={animalProfiles[currentAnimalIndex]}
@@ -168,6 +238,7 @@ export const Mypage = () => {
           isPet={false}
         />
       </div>
+
       <div className="blog-section">
         <h3>내가 쓴 블로그</h3>
         {personProfile.blogPosts && personProfile.blogPosts.length > 0 ? (
@@ -180,7 +251,6 @@ export const Mypage = () => {
           <p>No blog posts</p>
         )}
       </div>
-      <p>{isAuthenticated ? <Logout /> : null}</p>
       <p>{isAuthenticated ? username : "LOGIN"}</p>
     </div>
   );

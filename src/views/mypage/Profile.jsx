@@ -1,8 +1,9 @@
+import { Photo } from '@mui/icons-material';
 import React, { useState } from 'react';
 
-const Profile = ({ user, updateUser, isPet }) => {
-  const [profilePic, setProfilePic] = useState(user.profilePic);
-
+const Profile = ({ user, updateUser, isPet, isAuthenticated, username }) => {
+  // const [profilePic, setProfilePic] = useState(user.profilePic);
+  
   const handleProfilePicChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -19,18 +20,19 @@ const Profile = ({ user, updateUser, isPet }) => {
     <div className="profile">
       <h1>{user.name}</h1>
       {isPet ? (
-        <>
           <p>반려동물 종: {user.species}</p>
-          <p>성별: {user.bio}</p>
-        </>
+        
       ) : (
-        <p>아이디: {user.id}</p>
+         <p>{isAuthenticated ? username : " 로그인.."}</p>
       )}
-      
-      {isPet ? <p>
-        <input type="file" accept="image/*" onChange={handleProfilePicChange} />
-      {profilePic && <img src={profilePic} alt="Profile" className="round-img" />}
-      </p> : <p>전화번호: {user.tel}</p>}
+
+      {isPet ? (
+        <p>
+          <p>성별: {user.bio}</p>
+        </p>
+      ) : (
+        <p>전화번호: {user.tel}</p>
+      )}
     </div>
   );
 };

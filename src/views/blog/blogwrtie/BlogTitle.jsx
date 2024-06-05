@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
-export default function FormPropsTextFields() {
+export default function BlogTitle() {
   const [image, setImage] = React.useState(null);
   const [imageUrl, setImageUrl] = React.useState(null);
   const [title, setTitle] = React.useState("블로그 제목");
@@ -25,9 +25,34 @@ export default function FormPropsTextFields() {
   };
 
   const handleContentChange = (event) => {
-    setContent(event.target.value);
+   setContent(event.target.value);
     event.target.style.height = 'auto';
     event.target.style.height = `${event.target.scrollHeight}px`;
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData();
+    formData.append('content_title', title);
+    formData.append('content', content);
+    formData.append('image', image);
+
+    try {
+      const response = await fetch('http://localhost:8000/post/content', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (response.ok) {
+        console.log('Blog post uploaded successfully');
+        // 성공적으로 업로드되었을 때 수행할 작업 추가
+      } else {
+        console.error('Failed to upload blog post');
+      }
+    } catch (error) {
+      console.error('Error uploading blog post:', error);
+    }
   };
 
   return (
@@ -40,16 +65,18 @@ export default function FormPropsTextFields() {
       }}
       noValidate
       autoComplete="off"
+      onSubmit={handleSubmit}
     >
       <div>
         <TextField
           required
           id="outlined-required"
-          label="제목"
-          value={title}
+          placeholder="제목"
+         
           onChange={handleTitleChange}
           variant="outlined"
           fullWidth
+          
         />
       </div>
       <div>
@@ -57,7 +84,6 @@ export default function FormPropsTextFields() {
           required
           id="filled-required"
           placeholder="내용을 입력하세요"
-          value={content}
           onChange={handleContentChange}
           style={{
             width: '100%',
